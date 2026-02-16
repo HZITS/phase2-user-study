@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Recommendations Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        /* Consent Form */
+        .consent-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .consent-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .consent-section h3 {
+            color: #555;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .consent-section p,
+        .consent-section li {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .consent-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .consent-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .consent-checkbox:hover {
+            border-color: #667eea;
+            background: #f0f1ff;
+        }
+
+        .consent-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .consent-checkbox label {
+            color: #333;
+            font-size: 15px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .consent-actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Video Interface */
+        .study-interface {}
+
+        .timer-bar {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timer-bar strong {
+            color: #333;
+            font-size: 16px;
+        }
+
+        .timer-bar span {
+            color: #667eea;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .video-info {
+            padding: 12px;
+        }
+
+        .video-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-channel {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .video-badges {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-language {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-tier {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .proceed-section {
+            padding: 30px;
+            text-align: center;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .proceed-section p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Gaming Recommendations Study</h1>
+            <p>Help us understand how YouTube recommendation algorithms work</p>
+        </div>
+
+        <!-- CONSENT FORM -->
+        <div class="content consent-section" id="consentSection">
+            <h2>Study Information and Consent</h2>
+
+            <h3>Purpose</h3>
+            <p>This study investigates fairness in YouTube gaming content recommendation algorithms, specifically
+                focusing on language diversity and creator representation in Kazakhstan's multilingual gaming ecosystem.
+            </p>
+
+            <h3>What You'll Do</h3>
+            <ul>
+                <li><strong>Step 1:</strong> Review 20 YouTube gaming video recommendations (~5 minutes)</li>
+                <li><strong>Step 2:</strong> Complete a brief survey about your experience (~5 minutes)</li>
+                <li><strong>Total time:</strong> Approximately 10 minutes</li>
+            </ul>
+
+            <h3>Data Collection</h3>
+            <p>We will collect:</p>
+            <ul>
+                <li>Time spent reviewing recommendations</li>
+                <li>Your ratings of recommendation quality, diversity, and fairness</li>
+                <li>Basic demographics (age, academic background, gaming content consumption habits)</li>
+            </ul>
+            <p><strong>We will NOT collect:</strong> Your name, email, or any personally identifiable information.</p>
+
+            <h3>Privacy & Confidentiality</h3>
+            <ul>
+                <li>All responses are <strong>completely anonymous</strong></li>
+                <li>Data will be used solely for academic research purposes</li>
+                <li>Results will be reported in aggregate form only</li>
+                <li>No individual responses will be identifiable</li>
+            </ul>
+
+            <h3>Voluntary Participation</h3>
+            <p>Your participation is entirely voluntary. You may withdraw at any time without penalty by simply closing
+                this browser window.</p>
+
+            <h3>Contact</h3>
+            <p><strong>Researcher:</strong> Aibar Zhangabay (Master's student)<br>
+                <strong>Questions:</strong> Contact via Telegram or email (provided upon request)
+            </p>
+
+            <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
+
+            <h3>Consent to Participate</h3>
+            <p style="margin-bottom: 20px;">Please check all boxes below to confirm your consent:</p>
+
+            <div class="consent-checkbox">
+                <input type="checkbox" id="consent1">
+                <label for="consent1">I confirm that I am <strong>18 years of age or older</strong></label>
+            </div>
+
+            <div class="consent-checkbox">
+                <input type="checkbox" id="consent2">
+                <label for="consent2">I have read and understood the study information above</label>
+            </div>
+
+            <div class="consent-checkbox">
+                <input type="checkbox" id="consent3">
+                <label for="consent3">I understand that my participation is <strong>voluntary</strong> and I can
+                    withdraw at any time</label>
+            </div>
+
+            <div class="consent-checkbox">
+                <input type="checkbox" id="consent4">
+                <label for="consent4">I agree to participate in this study and allow my <strong>anonymous</strong> data
+                    to be used for research purposes</label>
+            </div>
+
+            <div class="consent-actions">
+                <button class="btn btn-primary" id="agreeBtn" disabled>I Agree - Begin Study</button>
+            </div>
+        </div>
+
+        <!-- VIDEO INTERFACE -->
+        <div class="study-interface" id="studyInterface">
+            <div class="timer-bar">
+                <strong>Review these gaming recommendations:</strong>
+                <span id="timer">0:00</span>
+            </div>
+
+            <div class="video-grid" id="videoGrid">
+                <!-- Videos will be inserted here by JavaScript -->
+            </div>
+
+            <div class="proceed-section">
+                <p>When you're ready, proceed to the survey to share your feedback.</p>
+                <button class="btn btn-primary" id="proceedBtn">Proceed to Survey</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURATION - YOUR GOOGLE FORM
+        // ==========================================
+        const SURVEY_BASE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe1MUrxW3PaQLuNYLkSxI6hPlXcv39RXKUOEJM3Rky4oSdMnQ/viewform";
+        const ENTRY_PARTICIPANT_ID = "entry.352698579";
+        const ENTRY_CONDITION = "entry.1516342763";
+        const ENTRY_DURATION = "entry.2139917312";
+
+        // ==========================================
+        // VIDEO DATA - PASTE YOUR JSON HERE
+        // ==========================================
+        const videoData = {
+            control: [
+                {
+                    "title": "Ұрылар жайлы сұмдық оқиға | Түнде ешқашан ұйықтама!",
+                    "channel": "AJIuKZ",
+                    "subscribers": "3.0M",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "4.6M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/VpmmJY8wu-8/maxresdefault.jpg",
+                    "duration": "35:09",
+                    "video_id": "VpmmJY8wu-8"
+                },
+                {
+                    "title": "КИНО СТРЕЛКА 93 АДАМ: Супергерой, ФриФаер, Хоррор, Мортал Комбат, Инджастис ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "4.4M",
+                    "date": "3 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/pNowOEapV6Q/maxresdefault.jpg",
+                    "duration": "44:13",
+                    "video_id": "pNowOEapV6Q"
+                },
+                {
+                    "title": "СТРЕЛКАҒА БАРЛЫҒЫ КЕЛДІ Супергерой, Хоррор, Мортал Комбат, Инджастис ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "3.3M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/RrtCn1gRlHo/maxresdefault.jpg",
+                    "duration": "31:32",
+                    "video_id": "RrtCn1gRlHo"
+                },
+                {
+                    "title": "МАЙНКРАФТ, БІРАҚ ГИГАНТ КРАФТТАР қазақша майнкрафт казакша дейлин",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "3.0M",
+                    "date": "3 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/Bohg2uw0Tvg/maxresdefault.jpg",
+                    "duration": "35:19",
+                    "video_id": "Bohg2uw0Tvg"
+                },
+                {
+                    "title": "250 ОҚУШЫ ЕҢ ҮЛКЕН СТРЕЛКА! ТОЛЫҚ КИНО ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "2.9M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/eRML266XXHg/maxresdefault.jpg",
+                    "duration": "1:00:04",
+                    "video_id": "eRML266XXHg"
+                },
+                {
+                    "title": "КИНО 200 БРАТВА СТРЕЛКАҒА КЕЛДІ ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "2.9M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/YpBJFCuqY_o/maxresdefault.jpg",
+                    "duration": "56:22",
+                    "video_id": "YpBJFCuqY_o"
+                },
+                {
+                    "title": "150 АДАМ ЕҢ ҮЛКЕН СТРЕЛКА толық кино ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "2.9M",
+                    "date": "3 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/6HUkqIetrPE/maxresdefault.jpg",
+                    "duration": "57:18",
+                    "video_id": "6HUkqIetrPE"
+                },
+                {
+                    "title": "ТОЛПА СУПЕРГЕРОЙ VS ХОРРОР ТӨБЕЛЕС ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "2.3M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/wYtVEcqFLD8/maxresdefault.jpg",
+                    "duration": "20:47",
+                    "video_id": "wYtVEcqFLD8"
+                },
+                {
+                    "title": "😱СКАЙБЛОКТА ҚҰПИЯ ҮЙ ТАУЫП АЛДЫМ✅",
+                    "channel": "QalamGo",
+                    "subscribers": "296K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "2.2M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/OqOmFIXQVRY/maxresdefault.jpg",
+                    "duration": "11:49",
+                    "video_id": "OqOmFIXQVRY"
+                },
+                {
+                    "title": "Мына семізге Пицца апарамыз деп қиындыққа тап болдық | Сұмдық оқиға!",
+                    "channel": "AJIuKZ",
+                    "subscribers": "3.0M",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "2.1M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/rodqBuMqJms/maxresdefault.jpg",
+                    "duration": "40:04",
+                    "video_id": "rodqBuMqJms"
+                },
+                {
+                    "title": "Бұл Әже ұйқысынан оянса жаман болады!",
+                    "channel": "AJIuKZ",
+                    "subscribers": "3.0M",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "2.1M",
+                    "date": "3 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/rOt61nWWq0g/maxresdefault.jpg",
+                    "duration": "12:45",
+                    "video_id": "rOt61nWWq0g"
+                },
+                {
+                    "title": "МЕКТЕПТІ ҚОРҒАУ ☀ САМУРАЙЛАР МЕКТЕПКЕ ШАБУЫЛ ЖАСАДЫ ☀ SEGA KZ 2",
+                    "channel": "SEGA KZ 2",
+                    "subscribers": "351K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "2.1M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/7-1iVgAoLWI/maxresdefault.jpg",
+                    "duration": "24:21",
+                    "video_id": "7-1iVgAoLWI"
+                },
+                {
+                    "title": "МЕН АЙШУАК -КА ПАРКУР ӨТКІЗБЕЙ ПРАНК ЖАСАДЫМ қазақша майнкрафт казакша",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "2.0M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/WaLoDEmGNzs/maxresdefault.jpg",
+                    "duration": "14:56",
+                    "video_id": "WaLoDEmGNzs"
+                },
+                {
+                    "title": "МИЛЛИОНЕР ГРЭНДПА АТА ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "1.8M",
+                    "date": "3 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/_vHddM7YVQY/maxresdefault.jpg",
+                    "duration": "21:29",
+                    "video_id": "_vHddM7YVQY"
+                },
+                {
+                    "title": "АЙШУАК ЕКЕУМІЗ, БОМЖҒА АКША БЕРІП ЖАРЫСТЫК қазақша майнкрафт казакша",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "1.8M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/OuMnPjY1Y3I/maxresdefault.jpg",
+                    "duration": "15:04",
+                    "video_id": "OuMnPjY1Y3I"
+                },
+                {
+                    "title": "Тығылыспақ Шын Өмірде",
+                    "channel": "NONIKZ",
+                    "subscribers": "1.2M",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "1.6M",
+                    "date": "1 year ago",
+                    "thumbnail": "https://img.youtube.com/vi/Lznt2JyPSHw/maxresdefault.jpg",
+                    "duration": "37:44",
+                    "video_id": "Lznt2JyPSHw"
+                },
+                {
+                    "title": "АЙШУАК ЕКЕУМІЗ, ЗҰЛЫМ БОЛЫП НҰРСАЯҒА ПРАНК ЖАСАДЫК қазақша майнкрафт казакша дейлин",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "1.6M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/L5tkbtkIx8g/maxresdefault.jpg",
+                    "duration": "25:10",
+                    "video_id": "L5tkbtkIx8g"
+                },
+                {
+                    "title": "300 АДАМ МЕКТЕП СТРЕЛКАСЫ | ТОЛЫҚ КИНО ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "1.5M",
+                    "date": "1 year ago",
+                    "thumbnail": "https://img.youtube.com/vi/i4LvHJ7Rs80/maxresdefault.jpg",
+                    "duration": "1:12:36",
+                    "video_id": "i4LvHJ7Rs80"
+                },
+                {
+                    "title": "МЕНІ АСЫП ТҮСЕТІН АДАМ БАРМА ЕКЕН? КІМДІКІ ҰЗЫН қазақша майнкрафт казакша дейлин",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "1.5M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/6MNhjIsFwUA/maxresdefault.jpg",
+                    "duration": "22:41",
+                    "video_id": "6MNhjIsFwUA"
+                },
+                {
+                    "title": "МЕН АЙШУАК -КА ШАХТАДА ПРАНК ЖАСАДЫМ қазақша майнкрафт казакша",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "1.6M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/GR4Mhwn5jbM/maxresdefault.jpg",
+                    "duration": "17:55",
+                    "video_id": "GR4Mhwn5jbM"
+                }
+            ],
+            treatment: [
+                {
+                    "title": "Ұрылар жайлы сұмдық оқиға | Түнде ешқашан ұйықтама!",
+                    "channel": "AJIuKZ",
+                    "subscribers": "3.0M",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "4.6M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/VpmmJY8wu-8/maxresdefault.jpg",
+                    "duration": "35:09",
+                    "video_id": "VpmmJY8wu-8"
+                },
+                {
+                    "title": "КИНО СТРЕЛКА 93 АДАМ: Супергерой, ФриФаер, Хоррор, Мортал Комбат, Инджастис ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "4.4M",
+                    "date": "3 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/pNowOEapV6Q/maxresdefault.jpg",
+                    "duration": "44:13",
+                    "video_id": "pNowOEapV6Q"
+                },
+                {
+                    "title": "СТРЕЛКАҒА БАРЛЫҒЫ КЕЛДІ Супергерой, Хоррор, Мортал Комбат, Инджастис ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "3.3M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/RrtCn1gRlHo/maxresdefault.jpg",
+                    "duration": "31:32",
+                    "video_id": "RrtCn1gRlHo"
+                },
+                {
+                    "title": "МАЙНКРАФТ, БІРАҚ ГИГАНТ КРАФТТАР қазақша майнкрафт казакша дейлин",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "3.0M",
+                    "date": "3 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/Bohg2uw0Tvg/maxresdefault.jpg",
+                    "duration": "35:19",
+                    "video_id": "Bohg2uw0Tvg"
+                },
+                {
+                    "title": "250 ОҚУШЫ ЕҢ ҮЛКЕН СТРЕЛКА! ТОЛЫҚ КИНО ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "2.9M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/eRML266XXHg/maxresdefault.jpg",
+                    "duration": "1:00:04",
+                    "video_id": "eRML266XXHg"
+                },
+                {
+                    "title": "КИНО 200 БРАТВА СТРЕЛКАҒА КЕЛДІ ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "2.9M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/YpBJFCuqY_o/maxresdefault.jpg",
+                    "duration": "56:22",
+                    "video_id": "YpBJFCuqY_o"
+                },
+                {
+                    "title": "150 АДАМ ЕҢ ҮЛКЕН СТРЕЛКА толық кино ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "2.9M",
+                    "date": "3 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/6HUkqIetrPE/maxresdefault.jpg",
+                    "duration": "57:18",
+                    "video_id": "6HUkqIetrPE"
+                },
+                {
+                    "title": "ТОЛПА СУПЕРГЕРОЙ VS ХОРРОР ТӨБЕЛЕС ☀ Мектеп оқиғасы",
+                    "channel": "SEGA KZ",
+                    "subscribers": "729K",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "2.3M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/wYtVEcqFLD8/maxresdefault.jpg",
+                    "duration": "20:47",
+                    "video_id": "wYtVEcqFLD8"
+                },
+                {
+                    "title": "😱СКАЙБЛОКТА ҚҰПИЯ ҮЙ ТАУЫП АЛДЫМ✅",
+                    "channel": "QalamGo",
+                    "subscribers": "296K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "2.2M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/OqOmFIXQVRY/maxresdefault.jpg",
+                    "duration": "11:49",
+                    "video_id": "OqOmFIXQVRY"
+                },
+                {
+                    "title": "Мына семізге Пицца апарамыз деп қиындыққа тап болдық | Сұмдық оқиға!",
+                    "channel": "AJIuKZ",
+                    "subscribers": "3.0M",
+                    "language": "kazakh",
+                    "tier": "established",
+                    "views": "2.1M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/rodqBuMqJms/maxresdefault.jpg",
+                    "duration": "40:04",
+                    "video_id": "rodqBuMqJms"
+                },
+                {
+                    "title": "МЕКТЕПТІ ҚОРҒАУ ☀ САМУРАЙЛАР МЕКТЕПКЕ ШАБУЫЛ ЖАСАДЫ ☀ SEGA KZ 2",
+                    "channel": "SEGA KZ 2",
+                    "subscribers": "351K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "2.1M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/7-1iVgAoLWI/maxresdefault.jpg",
+                    "duration": "24:21",
+                    "video_id": "7-1iVgAoLWI"
+                },
+                {
+                    "title": "МЕН АЙШУАК -КА ПАРКУР ӨТКІЗБЕЙ ПРАНК ЖАСАДЫМ қазақша майнкрафт казакша",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "2.0M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/WaLoDEmGNzs/maxresdefault.jpg",
+                    "duration": "14:56",
+                    "video_id": "WaLoDEmGNzs"
+                },
+                {
+                    "title": "АЙШУАК ЕКЕУМІЗ, БОМЖҒА АКША БЕРІП ЖАРЫСТЫК қазақша майнкрафт казакша",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "1.8M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/OuMnPjY1Y3I/maxresdefault.jpg",
+                    "duration": "15:04",
+                    "video_id": "OuMnPjY1Y3I"
+                },
+                {
+                    "title": "АЙШУАК ЕКЕУМІЗ, ЗҰЛЫМ БОЛЫП НҰРСАЯҒА ПРАНК ЖАСАДЫК қазақша майнкрафт казакша дейлин",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "1.6M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/L5tkbtkIx8g/maxresdefault.jpg",
+                    "duration": "25:10",
+                    "video_id": "L5tkbtkIx8g"
+                },
+                {
+                    "title": "МЕНІ АСЫП ТҮСЕТІН АДАМ БАРМА ЕКЕН? КІМДІКІ ҰЗЫН қазақша майнкрафт казакша дейлин",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "1.5M",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/6MNhjIsFwUA/maxresdefault.jpg",
+                    "duration": "22:41",
+                    "video_id": "6MNhjIsFwUA"
+                },
+                {
+                    "title": "МЕН АЙШУАК -КА ШАХТАДА ПРАНК ЖАСАДЫМ қазақша майнкрафт казакша",
+                    "channel": "Дейлин KZ",
+                    "subscribers": "517K",
+                    "language": "kazakh",
+                    "tier": "emerging",
+                    "views": "1.6M",
+                    "date": "4 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/GR4Mhwn5jbM/maxresdefault.jpg",
+                    "duration": "17:55",
+                    "video_id": "GR4Mhwn5jbM"
+                },
+                {
+                    "title": "Когда PUBG MOBILE становится реальностью — что бы вы хотели изменить? 🪖",
+                    "channel": "PUBG MOBILE СНГ",
+                    "subscribers": "666K",
+                    "language": "russian",
+                    "tier": "established",
+                    "views": "1.0M",
+                    "date": "3 days ago",
+                    "thumbnail": "https://img.youtube.com/vi/zHyTJpmFskk/maxresdefault.jpg",
+                    "duration": "1:21",
+                    "video_id": "zHyTJpmFskk"
+                },
+                {
+                    "title": "Это официально! Boundless Music Concert приходит в PUBG MOBILE 🎧🔥",
+                    "channel": "PUBG MOBILE СНГ",
+                    "subscribers": "666K",
+                    "language": "russian",
+                    "tier": "established",
+                    "views": "670K",
+                    "date": "4 days ago",
+                    "thumbnail": "https://img.youtube.com/vi/9o2_3ivJSvA/maxresdefault.jpg",
+                    "duration": "0:20",
+                    "video_id": "9o2_3ivJSvA"
+                },
+                {
+                    "title": "АНИМАТОР VS АНИМАЦИЯ 5,6,7,8 (Animator vs. Animation Season 2 (Ep 5-8)) Реакция",
+                    "channel": "QalamGo",
+                    "subscribers": "296K",
+                    "language": "russian",
+                    "tier": "emerging",
+                    "views": "757K",
+                    "date": "2 years ago",
+                    "thumbnail": "https://img.youtube.com/vi/bBcyGeQKL3M/maxresdefault.jpg",
+                    "duration": "31:29",
+                    "video_id": "bBcyGeQKL3M"
+                }
+            ]
+        };
+
+        // ==========================================
+        // STUDY LOGIC
+        // ==========================================
+        let startTime;
+        let timerInterval;
+        let condition;
+        let participantId;
+
+        // Consent form handling
+        const consentCheckboxes = [
+            document.getElementById('consent1'),
+            document.getElementById('consent2'),
+            document.getElementById('consent3'),
+            document.getElementById('consent4')
+        ];
+        const agreeBtn = document.getElementById('agreeBtn');
+
+        function checkConsent() {
+            const allChecked = consentCheckboxes.every(cb => cb.checked);
+            agreeBtn.disabled = !allChecked;
+        }
+
+        consentCheckboxes.forEach(cb => {
+            cb.addEventListener('change', checkConsent);
+        });
+
+        agreeBtn.addEventListener('click', startStudy);
+
+        function startStudy() {
+            // Random assignment
+            condition = Math.random() < 0.5 ? 'control' : 'treatment';
+
+            // Generate participant ID
+            participantId = 'P' + Date.now().toString().slice(-6);
+
+            console.log(`Participant: ${participantId}, Condition: ${condition}`);
+
+            // Hide consent, show videos
+            document.getElementById('consentSection').classList.add('hidden');
+            document.getElementById('studyInterface').classList.remove('hidden');
+
+            // Load videos
+            loadVideos(condition);
+
+            // Start timer
+            startTime = Date.now();
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            document.getElementById('timer').textContent =
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function loadVideos(condition) {
+            const videos = videoData[condition];
+            const grid = document.getElementById('videoGrid');
+            grid.innerHTML = '';
+
+            videos.forEach((video, index) => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.onclick = () => window.open(`https://www.youtube.com/watch?v=${video.video_id}`, '_blank');
+
+                card.innerHTML = `
+                    <img src="${video.thumbnail}" alt="${video.title}" class="video-thumbnail" 
+                         onerror="this.src='https://via.placeholder.com/320x180?text=Video+Thumbnail'">
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-channel">${video.channel} • ${video.subscribers}</div>
+                        <div class="video-meta">
+                            <span>${video.views} views</span>
+                            <span>${video.date}</span>
+                        </div>
+                        <div class="video-badges">
+                            <span class="badge badge-language">${getLanguageLabel(video.language)}</span>
+                            <span class="badge badge-tier">${getTierLabel(video.tier)}</span>
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        function getLanguageLabel(lang) {
+            const labels = {
+                'kazakh': '🇰🇿 Kazakh',
+                'russian': '🇷🇺 Russian',
+                'mixed': '🌐 Mixed',
+                'english': '🇬🇧 English'
+            };
+            return labels[lang] || lang;
+        }
+
+        function getTierLabel(tier) {
+            const labels = {
+                'emerging': '⭐ Emerging',
+                'established': '👑 Established'
+            };
+            return labels[tier] || tier;
+        }
+
+        // Proceed to survey
+        document.getElementById('proceedBtn').addEventListener('click', proceedToSurvey);
+
+        function proceedToSurvey() {
+            clearInterval(timerInterval);
+
+            const sessionDuration = Math.floor((Date.now() - startTime) / 1000);
+
+            // Build pre-filled survey URL
+            const surveyURL = `${SURVEY_BASE_URL}?${ENTRY_PARTICIPANT_ID}=${participantId}&${ENTRY_CONDITION}=${condition}&${ENTRY_DURATION}=${sessionDuration}`;
+
+            console.log('Redirecting to survey:', surveyURL);
+
+            // Open survey in new tab
+            window.open(surveyURL, '_blank');
+
+            // Show completion message
+            document.getElementById('studyInterface').innerHTML = `
+                <div style="padding: 60px; text-align: center;">
+                    <h2 style="color: #667eea; margin-bottom: 20px;">✅ Thank You!</h2>
+                    <p style="color: #666; font-size: 16px; margin-bottom: 15px;">
+                        The survey has opened in a new tab. Please complete it to finish the study.
+                    </p>
+                    <p style="color: #888; font-size: 14px;">
+                        If the survey didn't open, <a href="${surveyURL}" target="_blank" style="color: #667eea;">click here</a>.
+                    </p>
+                    <p style="color: #888; font-size: 14px; margin-top: 30px;">
+                        You may close this tab after completing the survey.
+                    </p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html>
